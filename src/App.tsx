@@ -1,27 +1,50 @@
 import React from 'react'
 
-import Button from '@mui/material/Button'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
-import Avatar from '@mui/material/Avatar'
+import {
+  Button,
+  Box,
+  Grid,
+  Typography,
+  TextField,
+  Avatar,
+  List,
+  ListItem
+} from '@mui/material'
 
 import { deepOrange } from '@mui/material/colors'
 
 const App = () => {
-  let name = "Amier"
-  let message = "Hello, "
+  let name = "Amier - Codehouserqwerqwerqwerqew"
+  let message = "Hello"
+  let cities = [
+    "Boston",
+    "New York",
+    "Mountain View"
+  ]
   return (
     <>
-      <Grid container spacing={2}>
-        <Button variant="contained">Click me</Button>
+      <List>
+        { /* dynamically rendering */}
+        {cities.map((city) => (
+          <ListItem>
+            <Typography variant="body1">{city}</Typography>
+          </ListItem>
+        ))}
+        <ListItem>
+          <Typography variant="body1">Manually Typed City</Typography>
+        </ListItem>
+      </List>
+      <Button variant="contained" sx={{ bgcolor: "#A0B9BF", px: "8rem", width: "100%" }}>Click me</Button>
+
+
+      {/* using container elements. applying flex on the parent component */}
+      <Box sx={{ width: "100%", display: "flex", flexDirection: "column", flexWrap: "wrap", bgcolor: "#A0B9BF", justifyContent: "center", alignItems: "center" }}>
+        {/* dynamically rendering components with ternary operator */}
+        {message ? <Typography>{message}</Typography> : <Typography>No message</Typography>}
         <Typography variant="h3" component="h2">
           {message}{name}
         </Typography>
-        <TextField>
-        </TextField>
-        <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar>
-      </Grid>
+      </Box >
     </>
   )
 }
