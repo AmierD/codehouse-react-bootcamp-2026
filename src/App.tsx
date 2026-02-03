@@ -1,14 +1,11 @@
 import React from 'react'
 
 import {
-  Button,
   Box,
+  Button,
   Grid,
-  Typography,
-  TextField,
-  Avatar,
-  List,
-  ListItem
+  Paper,
+  Typography
 } from '@mui/material'
 
 import { deepOrange } from '@mui/material/colors'
@@ -19,31 +16,49 @@ const App = () => {
   let cities = [
     "Boston",
     "New York",
-    "Mountain View"
+    "Mountain View",
+    "Columbus",
+    "Denver",
+    "Pleasanton"
   ]
   return (
     <>
-      <List>
-        { /* dynamically rendering */}
-        {cities.map((city) => (
-          <ListItem>
-            <Typography variant="body1">{city}</Typography>
-          </ListItem>
-        ))}
-        <ListItem>
-          <Typography variant="body1">Manually Typed City</Typography>
-        </ListItem>
-      </List>
-      <Button variant="contained" sx={{ bgcolor: "#A0B9BF", px: "8rem", width: "100%" }}>Click me</Button>
-
-
-      {/* using container elements. applying flex on the parent component */}
-      <Box sx={{ width: "100%", display: "flex", flexDirection: "column", flexWrap: "wrap", bgcolor: "#A0B9BF", justifyContent: "center", alignItems: "center" }}>
-        {/* dynamically rendering components with ternary operator */}
-        {message ? <Typography>{message}</Typography> : <Typography>No message</Typography>}
-        <Typography variant="h3" component="h2">
-          {message}{name}
-        </Typography>
+      <Box sx={{ display: "flex", justifyContent: "center" }} >
+        <Paper elevation={2}
+          sx={{
+            width: { xs: "100%", md: "50%" },
+            display: "flex",
+            justifyContent: "center",
+            padding: "5rem 0rem"
+          }}>
+          <Grid container spacing={3}>
+            <Grid size={12}>
+              <Button variant="contained" sx={{ width: "100%" }}>
+                Click me
+              </Button>
+            </Grid>
+            <Grid size={5}>
+              <Button variant="contained" sx={{ width: "100%" }} >
+                Click me too
+              </Button>
+            </Grid>
+            <Grid size={7}>
+              <Button variant="contained" sx={{ width: "100%" }} >
+                Click me also
+              </Button>
+            </Grid>
+            {cities.map(city => (
+              <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <Typography>{city}</Typography>
+                  <Button variant="contained" href={`https://www.google.com/search?q=${city}`} sx={{ width: "100%" }} >
+                    Learn more
+                  </Button>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Paper>
       </Box >
     </>
   )
