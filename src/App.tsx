@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState } from 'react'
 
 import {
   Box,
@@ -8,11 +8,8 @@ import {
   Typography
 } from '@mui/material'
 
-import { deepOrange } from '@mui/material/colors'
 
 const App = () => {
-  let name = "Amier - Codehouserqwerqwerqwerqew"
-  let message = "Hello"
   let cities = [
     "Boston",
     "New York",
@@ -21,8 +18,41 @@ const App = () => {
     "Denver",
     "Pleasanton"
   ]
+  const [welcomeOn, setWelcomeOn] = useState(false)
+  const [randomCity, setRandomCity] = useState(cities[0])
+
+  const handleClick = (city: string) => {
+    window.location.href = `https://www.google.com/search?q=${city}`
+  }
+
+  const handleWelcomeClick = () => {
+    setWelcomeOn(true)
+  }
+
+  const handleRandomCityClick = () => {
+    const randomIndex = Math.floor(Math.random() * cities.length)
+    const selectedCity = cities[randomIndex]
+    setRandomCity(selectedCity)
+  }
+
+
   return (
     <>
+      <Paper sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}>
+        <Button variant="contained" onClick={handleRandomCityClick}>
+          Get a random city
+        </Button>
+        <Typography>The city you chose is {randomCity}</Typography>
+        <Button variant="contained" onClick={handleWelcomeClick}>
+          Be Welcomed
+        </Button>
+        <Typography> {welcomeOn ? "Welcome" : "Go Away"}</Typography>
+      </Paper>
       <Box sx={{ display: "flex", justifyContent: "center" }} >
         <Paper elevation={2}
           sx={{
@@ -32,26 +62,20 @@ const App = () => {
             padding: "5rem 0rem"
           }}>
           <Grid container spacing={3}>
-            <Grid size={12}>
-              <Button variant="contained" sx={{ width: "100%" }}>
-                Click me
-              </Button>
-            </Grid>
-            <Grid size={5}>
-              <Button variant="contained" sx={{ width: "100%" }} >
-                Click me too
-              </Button>
-            </Grid>
-            <Grid size={7}>
-              <Button variant="contained" sx={{ width: "100%" }} >
-                Click me also
-              </Button>
-            </Grid>
             {cities.map(city => (
               <Grid size={{ xs: 12, md: 6, lg: 3 }}>
-                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <Box sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center"
+                }}>
                   <Typography>{city}</Typography>
-                  <Button variant="contained" href={`https://www.google.com/search?q=${city}`} sx={{ width: "100%" }} >
+                  <Button
+                    variant="contained"
+                    // href={`https://www.google.com/search?q=${city}`}
+                    sx={{ width: "100%" }}
+                    onClick={() => handleClick(city)}
+                  >
                     Learn more
                   </Button>
                 </Box>
